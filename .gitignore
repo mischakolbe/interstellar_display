@@ -1,4 +1,7 @@
-# Python ignores
+# VS code
+main/.vscode/*
+
+# Python
 *.pyc
 
 # Prerequisites
