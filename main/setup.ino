@@ -1,4 +1,4 @@
-/*XYZ*/
+/*Initialize the microprocessor.*/
 void setup() {
   Serial.begin(9600);
   Serial.println("Setting up!");
