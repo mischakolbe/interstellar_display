@@ -1,4 +1,4 @@
-/*XYZ*/
+/*Repeat while microprocessor is running.*/
 void loop() {
   getRandomQuoteId();
   prepareForNextQuote();
