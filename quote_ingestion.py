@@ -17,8 +17,12 @@ def ingest_quotes_csv(csv_file="quote_ingestion_example.csv", skip_first_line=Tr
         skip_first_line (bool): Whether the first line (usually contains labels)
             should be skipped.
     """
-    with open(csv_file, "r") as f:
-        reader = csv.reader(f)
+    delimiter = ","
+    if csv_file.endswith(".tsv"):
+        delimiter = "\t"
+
+    with open(csv_file, "r", encoding="utf8") as f:
+        reader = csv.reader(f, delimiter=delimiter)
     
         # Skip the headers
         if skip_first_line:
@@ -26,11 +30,19 @@ def ingest_quotes_csv(csv_file="quote_ingestion_example.csv", skip_first_line=Tr
 
         quotes = []
         for row in reader:
+            too_many_columns = len(row) > 3
+            if too_many_columns:
+                row = row[:3]
+
             is_joke, author, message = row
             # Either the author or the message of a quote must exist.
             if not (author or message):
                 continue
             
+            if too_many_columns:
+                msg = "Row with message {} has too many columns ({})"
+                print(msg.format(row[2], len(row)))
+
             # Escape double quotes in message
             message = message.replace('"', r'\"')
 
@@ -47,7 +59,7 @@ def ingest_quotes_csv(csv_file="quote_ingestion_example.csv", skip_first_line=Tr
 
     base_path = pathlib.Path(__file__).parent.absolute()
     quotes_file = os.path.join(base_path, "main", "quotes.h")
-    with open(quotes_file, "w") as _f:
+    with open(quotes_file, "w", encoding="utf-8") as _f:
         _f.write(output_string)
 
     print("Ingested a total of {} quotes!".format(len(quotes)))
