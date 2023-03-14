@@ -39,12 +39,12 @@ const int maxCharPerLine = 21;  // max characters per line (to avoid cut off cha
 
 
 // SETTINGS
+int cursorBlinkSpeed = 500;
+int holdBlinkNumTimes = 5; // A blink is a full cycle: On & Off
+int minWriteTime = 15; // Shortest time to write new character.
+int maxWriteTime = 250;  // Longest time to write new character.
 const int lineHeight = 8;
-const int cursorBlinkSpeed = 500;
-const int holdBlinkNumTimes = 5; // A blink is a full cycle: On & Off
 const int minJokeIndicatorDelay = cursorBlinkSpeed*holdBlinkNumTimes/3;
 const int maxJokeIndicatorDelay = cursorBlinkSpeed*holdBlinkNumTimes;
-const int minWriteTime = 15; // Shortest time to write new character.
-const int maxWriteTime = 250;  // Longest time to write new character.
 const String authorPrefix = ">";
 const bool DEBUG = false;

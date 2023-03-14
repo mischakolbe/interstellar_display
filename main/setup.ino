@@ -16,4 +16,12 @@ void setup() {
   analogReadResolution(12);
   // Use a floating analog pin to generate a random seed value.
   randomSeed(analogRead(A2));
+
+  if (DEBUG) {
+    cursorBlinkSpeed = 150;
+    holdBlinkNumTimes = 5; // A blink is a full cycle: On & Off
+    minWriteTime = 5; // Shortest time to write new character.
+    maxWriteTime = 15;  // Longest time to write new character.
+  }
+
 }
